@@ -9,7 +9,7 @@
   ],
   "layer": [
     {
-      "data": { "url": "datasets/melbourne_suburbs.topojson", "format": {"type": "topojson", "feature": "small-areas-for-census-of-land-use-and-employment-clue"} },
+      "data": { "url": "datasets/melbourne_suburbs.topojson", "format": {"type": "topojson", "feature": "melbourne_suburbs"} },
       "mark": {"type": "geoshape", "fill": "#EAE2D6", "stroke": "white"}
     },
     {
