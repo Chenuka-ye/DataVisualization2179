@@ -1,0 +1,21 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Average Monthly Spending Patterns",
+  "data": { "url": "datasets/Cafes, restaurants and takeaway food services.csv" },
+  "transform": [
+    { "calculate": "timeParse(datum.Month, '%b-%Y')", "as": "parsed_date" },
+    { "filter": "datum.parsed_date != null" },
+    { "calculate": "toNumber(replace(datum['Seasonally adjusted ($m)'], ',', ''))", "as": "spending_num" },
+    { "filter": "datum.spending_num > 0" },
+    { "calculate": "timeFormat(datum.parsed_date, '%b')", "as": "month_name" }
+  ],
+  "mark": { "type": "bar", "cornerRadiusEnd": 4, "tooltip": true },
+  "encoding": {
+    "x": { "field": "month_name", "type": "nominal", "sort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "title": "Month", "axis": {"labelAngle": 0} },
+    "y": { "aggregate": "mean", "field": "spending_num", "type": "quantitative", "title": "Average Spending ($ million)" },
+    "color": { "field": "month_name", "type": "nominal", "legend": null, "scale": {"scheme": "browns"} }
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

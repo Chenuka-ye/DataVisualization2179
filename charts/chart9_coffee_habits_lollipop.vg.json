@@ -1,0 +1,20 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Global Coffee Type Preferences",
+  "data": { "url": "datasets/worldwide_coffee_habits.csv" },
+  "transform": [
+    { "aggregate": [{ "op": "count", "as": "count" }], "groupby": ["Type of Coffee Consumed"] }
+  ],
+  "layer": [
+    { "mark": {"type": "rule", "color": "#d7c2a8"} },
+    { "mark": {"type": "circle", "size": 300, "opacity": 1}, "encoding": {"color": {"field": "Type of Coffee Consumed", "type": "nominal", "scale": {"scheme": "browns"}, "legend": null}} }
+  ],
+  "encoding": {
+    "y": { "field": "Type of Coffee Consumed", "type": "nominal", "title": "Coffee Type" },
+    "x": { "field": "count", "type": "quantitative", "title": "Number of Records" },
+    "tooltip": [{"field": "Type of Coffee Consumed", "title": "Type"}, {"field": "count", "title": "Count"}]
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

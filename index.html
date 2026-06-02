@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Unstoppable Aussie Coffee Culture</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="js/vega_lite_vis.js" defer></script>
+</head>
+<body>
+  <section class="hero">
+    <div class="branding">FIT2179 Data Visualisation 2 | Monash University</div>
+    <h1>The Unstoppable Aussie Coffee Culture</h1>
+    <p class="subtitle">
+      Australians consume millions of cups of coffee every day. But how did Melbourne become the epicenter of this caffeine obsession, and how is global inflation impacting our daily brew?
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-value">2,000+</span><span class="stat-label">Cafés in Melbourne</span></div>
+      <div class="stat-item"><span class="stat-value">$1.5B</span><span class="stat-label">Monthly Spend</span></div>
+      <div class="stat-item"><span class="stat-value">60%</span><span class="stat-label">Outdoor Seating Growth</span></div>
+    </div>
+  </section>
+
+  <div class="section-tag">SECTION 01 // THE LOCAL HUB</div>
+  <section class="section-container">
+    <div class="text-container">
+      <h2>Melbourne: The Heart of the Hub</h2>
+      <p>Melbourne is internationally recognised for its vibrant café culture. Cafés are heavily concentrated throughout the Hoddle Grid, acting as major social, dining, and entertainment hubs. Click a bar below to filter the map geographic distributions.</p>
+    </div>
+    <div class="chart-container highlight-chart">
+      <div id="map_chart"></div> 
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> The Melbourne CBD holds the highest concentration of cafes, but clicking the bars reveals how surrounding suburbs like Carlton and Southbank are rapidly developing their own dense hospitality grids.</div>
+    </div>
+  </section>
+
+  <div class="section-tag">SECTION 02 // MASS EXCURSIONS</div>
+  <section class="section-container reverse">
+    <div class="chart-container highlight-chart">
+      <div id="interactive_size_map"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> Filtering out the smaller venues shows that the "Mega-Cafés" (100+ seats) are strategically positioned near major transit and tourist locations like the Yarra River.</div>
+    </div>
+    <div class="text-container">
+      <h2>Spotting the Mega-Cafés</h2>
+      <p>While Melbourne is known for its boutique hole-in-the-wall espresso bars, there are massive hospitality venues hidden in plain sight. Use the slider to filter out small cafes and reveal the city's highest-capacity dining locations.</p>
+    </div>
+  </section>
+
+  <div class="section-tag">SECTION 03 // CAPACITY AND DISTRIBUTIONS</div>
+  <section class="section-container">
+    <div class="chart-container">
+      <div id="distribution_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> The vast majority of cafes are designed for intimate settings, peaking heavily around the 20-50 seat mark.</div>
+    </div>
+    <div class="chart-container">
+      <div id="average_seating_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> Docklands defies the trend. It has fewer cafes overall, but the highest average seating capacity per venue.</div>
+    </div>
+  </section>
+
+  <div class="section-tag">SECTION 04 // THE SEATING EXPERIENCE</div>
+  <section class="section-container reverse">
+    <div class="text-container">
+      <h2>Indoor vs Outdoor Spaces</h2>
+      <p>As the café scene expands, so does the footprint. The balance of indoor and outdoor seating reflects our love for alfresco dining, rain or shine.</p>
+    </div>
+    <div class="chart-container highlight-chart">
+      <div id="indoor_outdoor_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> By limiting the view to the top highest capacity blocks, we see that while indoor seating heavily dominates, blocks in key dining precincts maintain robust outdoor provisions.</div>
+    </div>
+  </section>
+
+  <section class="section-container">
+    <div class="chart-container">
+      <div id="growth_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> Notice the aggressive slope for outdoor seating post-2010. Melbourne's changing laws actively encouraged sidewalk dining.</div>
+    </div>
+    <div class="text-container">
+      <h2>Consistent Capacity Growth</h2>
+      <p>Despite economic fluctuations between 2006 and 2014, Melbourne continually invested in both indoor and outdoor hospitality spaces.</p>
+    </div>
+  </section>
+
+  <div class="section-tag">SECTION 05 // THE ECONOMIC BOOM</div>
+  <section class="section-container reverse">
+    <div class="text-container">
+      <h2>A Nation Fuelled by Caffeine</h2>
+      <p>Spending on cafés, restaurants, and takeaway food services has steadily increased over time across the entire country, showing the robustness of our collective habit.</p>
+    </div>
+    <div class="chart-container highlight-chart">
+      <div id="spending_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> With the exception of the severe anomaly during the 2020 lockdowns, national spending shows an incredibly resilient, linear upward trajectory.</div>
+    </div>
+  </section>
+
+  <section class="section-container">
+    <div class="chart-container highlight-chart">
+      <div id="seasonality_heatmap"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> The darkest patches consistently appear in December, driven by holiday socialization and warm-weather dining.</div>
+    </div>
+    <div class="text-container">
+      <h2>The Seasonality Matrix</h2>
+      <p>By breaking spending down into a matrix, we can see two trends at once: the gradual darkening over the years representing macro-economic growth, and the seasonal bursts of spending.</p>
+    </div>
+  </section>
+
+  <section class="section-container reverse">
+    <div class="chart-container">
+      <div id="monthly_spending_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> When averaged out, November and December account for a massive spike in hospitality revenue compared to the winter slump of June/July.</div>
+    </div>
+    <div class="chart-container highlight-chart">
+      <div id="covid_resilience_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> The sheer height of the positive bars post-2020 proves the phenomenon of "revenge spending"—Australians rushed back to cafes faster than they left them.</div>
+    </div>
+  </section>
+
+  <div class="section-tag">SECTION 06 // GLOBAL MACRO PRESSURES</div>
+  <section class="section-container">
+    <div class="text-container">
+      <h2>The Global Price Squeeze</h2>
+      <p>Global coffee bean prices have seen massive volatility over the past decade. Yet, despite the rising cost of a flat white, Macroscopically, spending has not stopped.</p>
+    </div>
+    <div class="chart-container highlight-chart">
+      <div id="price_vs_spending_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> Look at 2011 and 2014. Massive global price spikes in coffee beans had absolutely zero negative impact on Australian café spending habits.</div>
+    </div>
+  </section>
+
+  <section class="section-container reverse">
+    <div class="chart-container">
+      <div id="habits_chart"></div>
+      <div class="chart-insight"><strong>💡 Key Insight:</strong> While traditional filter coffee dominates global generic data, Espresso-based drinks form the absolute backbone of the modern café economy.</div>
+    </div>
+    <div class="text-container">
+      <h2>What Are We Drinking?</h2>
+      <p>While flat whites and lattes remain cultural staples, changing preferences have diversified the market, driving up the average cost per cup globally.</p>
+    </div>
+  </section>
+
+  <section class="conclusion">
+    <h2>The Bottom Line</h2>
+    <p>Despite global supply pressures and the rising cost of living, Melbourne's café capacity continues to grow, and our national spending hasn't missed a beat. Coffee remains a non-negotiable cornerstone of the Australian way of life.</p>
+  </section>
+
+  <footer>
+    <p>
+      <strong>The Unstoppable Aussie Coffee Culture</strong> &middot; Designed and built by <strong>Chenuka Yehan Hewageegana</strong> &middot; FIT2179 Data Visualisation 2, Monash University, May 2026
+    </p>
+
+    <p>
+      <strong>Data Sources:</strong> 
+      (1) City of Melbourne Open Data: Cafes and Restaurants with Seating Capacity &amp; CLUE Small Areas Map (<a href="https://data.melbourne.vic.gov.au/" target="_blank">data.melbourne.vic.gov.au</a>) &middot; 
+      (2) Australian Bureau of Statistics: Cafes, restaurants and takeaway food services &amp; Food/Beverage Index Structure (<a href="https://www.abs.gov.au/" target="_blank">abs.gov.au</a>) &middot; 
+      (3) Kaggle Datasets: Worldwide Coffee Habits (authored by Waqar Ali) &amp; Historical Coffee Prices (<a href="https://www.kaggle.com/" target="_blank">kaggle.com</a>).
+    </p>
+
+    <p>
+      <strong>AI Acknowledgement:</strong> Gemini (Google) was used to assist with code generation and layout structuring in this visualisation.
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Average Seating Capacity by Area",
+  "data": { "url": "datasets/cafes-and-restaurants-with-seating-capacity.csv" },
+  "transform": [
+    { "filter": "datum.industry_anzsic4_description == 'Cafes and Restaurants'" },
+    { "aggregate": [{ "op": "mean", "field": "number_of_seats", "as": "average_seats" }], "groupby": ["clue_small_area"] }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": { "field": "clue_small_area", "type": "nominal", "sort": "-x", "title": "Area" },
+    "x": { "field": "average_seats", "type": "quantitative", "title": "Average Seats" },
+    "color": { "value": "#5d4037" },
+    "tooltip": [{"field": "clue_small_area", "title": "Area"}, {"field": "average_seats", "title": "Avg Seats", "format": ".1f"}]
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

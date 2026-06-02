@@ -1,0 +1,18 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Distribution of Cafe Seating Capacity",
+  "data": { "url": "datasets/cafes-and-restaurants-with-seating-capacity.csv" },
+  "transform": [
+    { "filter": "datum.industry_anzsic4_description == 'Cafes and Restaurants'" },
+    { "filter": "datum.number_of_seats > 0 && datum.number_of_seats < 500" }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": { "bin": { "maxbins": 20 }, "field": "number_of_seats", "type": "quantitative", "title": "Seats per cafe" },
+    "y": { "aggregate": "count", "type": "quantitative", "title": "Number of cafes" },
+    "color": { "value": "#8d6e63" }
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

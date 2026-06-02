@@ -1,0 +1,22 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Spending Seasonality Matrix",
+  "data": { "url": "datasets/Cafes, restaurants and takeaway food services.csv" },
+  "transform": [
+    { "calculate": "timeParse(datum.Month, '%b-%Y')", "as": "parsed_date" },
+    { "filter": "datum.parsed_date != null" },
+    { "calculate": "toNumber(replace(datum['Seasonally adjusted ($m)'], ',', ''))", "as": "spending_num" },
+    { "calculate": "year(datum.parsed_date)", "as": "Year" },
+    { "calculate": "timeFormat(datum.parsed_date, '%b')", "as": "Month_Name" }
+  ],
+  "mark": "rect",
+  "encoding": {
+    "x": { "field": "Month_Name", "type": "nominal", "sort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "title": "Month" },
+    "y": { "field": "Year", "type": "ordinal", "title": "Year", "sort": "descending" },
+    "color": { "field": "spending_num", "type": "quantitative", "scale": {"scheme": "browns"}, "title": "Spending ($M)" },
+    "tooltip": [{"field": "Year"}, {"field": "Month_Name", "title": "Month"}, {"field": "spending_num", "title": "Spending", "format": "$,.1f"}]
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

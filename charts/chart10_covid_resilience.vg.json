@@ -1,0 +1,28 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Year-over-Year Spending Growth",
+  "data": { "url": "datasets/Cafes, restaurants and takeaway food services.csv" },
+  "transform": [
+    { "calculate": "timeParse(datum.Month, '%b-%Y')", "as": "parsed_date" },
+    { "filter": "datum.parsed_date != null" },
+    { "calculate": "toNumber(replace(datum['Seasonally adjusted ($m)'], ',', ''))", "as": "spending" },
+    { "calculate": "year(datum.parsed_date)", "as": "Year" },
+    { "aggregate": [{"op": "sum", "field": "spending", "as": "Total_Spending"}], "groupby": ["Year"] },
+    { "window": [{"op": "lag", "field": "Total_Spending", "as": "Prev_Spending"}], "sort": [{"field": "Year"}] },
+    { "calculate": "datum.Prev_Spending > 0 ? (datum.Total_Spending - datum.Prev_Spending) / datum.Prev_Spending : 0", "as": "Growth_Rate" },
+    { "filter": "datum.Year > 2005" }
+  ],
+  "mark": {"type": "bar", "tooltip": true},
+  "encoding": {
+    "x": { "field": "Year", "type": "ordinal", "title": "Year" },
+    "y": { "field": "Growth_Rate", "type": "quantitative", "axis": {"format": ".0%"}, "title": "YoY Growth" },
+    "color": {
+      "condition": {"test": "datum.Growth_Rate < 0", "value": "#8d6e63"},
+      "value": "#5d4037"
+    },
+    "tooltip": [{"field": "Year"}, {"field": "Growth_Rate", "format": ".1%", "title": "Growth"}]
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

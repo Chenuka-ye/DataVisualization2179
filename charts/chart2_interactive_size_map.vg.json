@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 450,
+  "title": "Interactive Explorer: Filter Cafes by Size",
+  "projection": { "type": "mercator", "center": [144.963, -37.814], "scale": 200000 },
+  "params": [
+    { "name": "min_seats", "value": 50, "bind": { "input": "range", "min": 0, "max": 300, "step": 10, "name": "Min Seats: " } }
+  ],
+  "layer": [
+    {
+      "data": { "url": "datasets/melbourne_suburbs.topojson", "format": {"type": "topojson", "feature": "small-areas-for-census-of-land-use-and-employment-clue"} },
+      "mark": {"type": "geoshape", "fill": "#EAE2D6", "stroke": "white"}
+    },
+    {
+      "data": { "url": "datasets/cafes-and-restaurants-with-seating-capacity.csv" },
+      "transform": [
+        { "filter": "datum.industry_anzsic4_description == 'Cafes and Restaurants'" },
+        { "calculate": "toNumber(datum.number_of_seats)", "as": "seats_num" },
+        { "filter": "datum.seats_num >= min_seats" }
+      ],
+      "mark": { "type": "circle", "opacity": 0.8, "stroke": "black" },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude": { "field": "latitude", "type": "quantitative" },
+        "size": { "field": "seats_num", "type": "quantitative", "scale": {"range": [20, 400]} },
+        "color": { "field": "seats_num", "type": "quantitative", "scale": {"scheme": "browns"} },
+        "tooltip": [
+          { "field": "trading_name", "title": "Café Name" },
+          { "field": "clue_small_area", "title": "Area" },
+          { "field": "seats_num", "title": "Total Seats" }
+        ]
+      }
+    }
+  ]
+}

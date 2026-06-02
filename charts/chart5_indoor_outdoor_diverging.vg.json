@@ -1,0 +1,19 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Indoor vs Outdoor Seating by Block",
+  "data": { "url": "datasets/CafeResturantSeating.csv" },
+  "transform": [
+    { "fold": ["Indoor Seating", "Outdoor Seating"], "as": ["Seating Type", "Seats"] },
+    { "filter": "datum.Seats != null" }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": { "field": "Block ID", "type": "ordinal", "title": "Block ID", "axis": {"labelAngle": 0} },
+    "y": { "aggregate": "sum", "field": "Seats", "type": "quantitative", "title": "Total Seats" },
+    "color": { "field": "Seating Type", "type": "nominal", "scale": {"range": ["#5d4037", "#a1887f"]} },
+    "tooltip": [ { "field": "Block ID" }, { "field": "Seating Type" }, { "aggregate": "sum", "field": "Seats", "title": "Seats" } ]
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}

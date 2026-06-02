@@ -1,0 +1,19 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 350,
+  "title": "Australian Cafe Spending Trends",
+  "data": { "url": "datasets/Cafes, restaurants and takeaway food services.csv" },
+  "transform": [
+    { "calculate": "timeParse(datum.Month, '%b-%Y')", "as": "parsed_date" },
+    { "filter": "datum.parsed_date != null" },
+    { "calculate": "toNumber(replace(datum['Seasonally adjusted ($m)'], ',', ''))", "as": "spending_num" },
+    { "filter": "datum.spending_num > 0" }
+  ],
+  "mark": { "type": "line", "color": "#8d6e63", "strokeWidth": 2, "point": true, "tooltip": true },
+  "encoding": {
+    "x": { "field": "parsed_date", "type": "temporal", "title": "Date", "axis": { "labelAngle": -30, "grid": false } },
+    "y": { "field": "spending_num", "type": "quantitative", "title": "Spending ($ million)", "scale": { "zero": false } }
+  },
+  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+}
