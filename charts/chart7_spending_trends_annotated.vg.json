@@ -3,17 +3,48 @@
   "width": "container",
   "height": 350,
   "title": "Australian Cafe Spending Trends",
-  "data": { "url": "datasets/Cafes, restaurants and takeaway food services.csv" },
-  "transform": [
-    { "calculate": "timeParse(datum.Month, '%b-%Y')", "as": "parsed_date" },
-    { "filter": "datum.parsed_date != null" },
-    { "calculate": "toNumber(replace(datum['Seasonally adjusted ($m)'], ',', ''))", "as": "spending_num" },
-    { "filter": "datum.spending_num > 0" }
+  "layer": [
+    {
+      "data": { "url": "datasets/Cafes, restaurants and takeaway food services.csv" },
+      "transform": [
+        { "calculate": "timeParse(datum.Month, '%b-%Y')", "as": "parsed_date" },
+        { "filter": "datum.parsed_date != null" },
+        { "calculate": "toNumber(replace(datum['Seasonally adjusted ($m)'], ',', ''))", "as": "spending_num" },
+        { "filter": "datum.spending_num > 0" }
+      ],
+      "mark": { "type": "line", "color": "#8d6e63", "strokeWidth": 2.5, "point": {"filled": true, "fill": "white"}, "tooltip": true },
+      "encoding": {
+        "x": { "field": "parsed_date", "type": "temporal", "title": "Date", "axis": { "labelAngle": -30, "grid": false } },
+        "y": { "field": "spending_num", "type": "quantitative", "title": "Spending ($ million)", "scale": { "zero": false } },
+        "tooltip": [
+          {"field": "parsed_date", "type": "temporal", "title": "Date", "timeUnit": "yearmonth"},
+          {"field": "spending_num", "type": "quantitative", "title": "Monthly Spend", "format": "$,.0f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [ { "date": "2020-03-01", "event": "COVID-19 Lockdowns" } ]
+      },
+      "mark": { "type": "rule", "color": "#A0522D", "strokeDash": [4, 4], "strokeWidth": 2 },
+      "encoding": { "x": { "field": "date", "type": "temporal" } }
+    },
+    {
+      "data": {
+        "values": [ { "date": "2020-03-01", "y": 3000, "event": "COVID-19 Lockdowns" } ]
+      },
+      "mark": { "type": "text", "align": "left", "dx": 7, "dy": -10, "color": "#A0522D", "fontWeight": "bold", "fontSize": 13 },
+      "encoding": {
+        "x": { "field": "date", "type": "temporal" },
+        "y": { "field": "y", "type": "quantitative" },
+        "text": { "field": "event" }
+      }
+    }
   ],
-  "mark": { "type": "line", "color": "#8d6e63", "strokeWidth": 2, "point": true, "tooltip": true },
-  "encoding": {
-    "x": { "field": "parsed_date", "type": "temporal", "title": "Date", "axis": { "labelAngle": -30, "grid": false } },
-    "y": { "field": "spending_num", "type": "quantitative", "title": "Spending ($ million)", "scale": { "zero": false } }
-  },
-  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+  "config": { 
+    "font": "Arial", 
+    "axis": {"labelFontSize": 12, "titleFontSize": 14}, 
+    "title": {"fontSize": 16, "anchor": "start"},
+    "view": {"stroke": "transparent"} 
+  }
 }
