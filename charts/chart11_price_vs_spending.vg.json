@@ -13,20 +13,57 @@
       ],
       "mark": {"type": "area", "color": "#e0e0e0", "opacity": 0.5},
       "encoding": {
-        "x": {"field": "date", "type": "temporal", "title": "Year"},
-        "y": {"field": "spending", "type": "quantitative", "title": "Australian Spending ($M)"}
+        "x": {"field": "date", "type": "temporal", "title": "Year", "axis": {"grid": false}},
+        "y": {"field": "spending", "type": "quantitative", "title": "Australian Spending ($M)"},
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Date", "timeUnit": "yearmonth"},
+          {"field": "spending", "type": "quantitative", "title": "Aust. Spend", "format": "$,.0f"}
+        ]
       }
     },
     {
       "data": { "url": "datasets/coffee-prices-historical-data.csv" },
       "transform": [{ "calculate": "toDate(datum.date)", "as": "date" }],
-      "mark": {"type": "line", "color": "#5d4037", "strokeWidth": 2},
+      "mark": {"type": "line", "color": "#5d4037", "strokeWidth": 2.5},
       "encoding": {
         "x": {"field": "date", "type": "temporal"},
-        "y": {"field": " value", "type": "quantitative", "title": "Global Coffee Price (USD/lb)"}
+        "y": {"field": " value", "type": "quantitative", "title": "Global Coffee Price (USD/lb)"},
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Date", "timeUnit": "yearmonth"},
+          {"field": " value", "type": "quantitative", "title": "Global Bean Price", "format": "$0.2f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"date": "2011-05-01", "label": "2011 Crisis"},
+          {"date": "2014-04-01", "label": "2014 Drought"}
+        ]
+      },
+      "mark": {"type": "rule", "strokeDash": [3, 3], "color": "#C07C41", "strokeWidth": 1.5},
+      "encoding": { "x": {"field": "date", "type": "temporal"} }
+    },
+    {
+      "data": {
+        "values": [
+          {"date": "2011-05-01", "price": 280, "label": "2011 Crisis"},
+          {"date": "2014-04-01", "price": 210, "label": "2014 Drought"}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "dx": 5, "fontSize": 12, "fontWeight": "bold", "color": "#C07C41"},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "price", "type": "quantitative"},
+        "text": {"field": "label"}
       }
     }
   ],
   "resolve": {"scale": {"y": "independent"}},
-  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+  "config": { 
+    "font": "Arial", 
+    "axis": {"labelFontSize": 12, "titleFontSize": 14}, 
+    "title": {"fontSize": 16, "anchor": "start"},
+    "view": {"stroke": "transparent"} 
+  }
 }
