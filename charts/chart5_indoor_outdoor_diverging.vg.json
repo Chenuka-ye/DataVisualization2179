@@ -10,10 +10,24 @@
   ],
   "mark": "bar",
   "encoding": {
-    "x": { "field": "Block ID", "type": "ordinal", "title": "Block ID", "axis": {"labelAngle": 0} },
+    "x": { 
+      "field": "Block ID", 
+      "type": "ordinal", 
+      "title": "Block ID", 
+      "axis": {"labels": false, "ticks": false} 
+    },
     "y": { "aggregate": "sum", "field": "Seats", "type": "quantitative", "title": "Total Seats" },
     "color": { "field": "Seating Type", "type": "nominal", "scale": {"range": ["#5d4037", "#a1887f"]} },
-    "tooltip": [ { "field": "Block ID" }, { "field": "Seating Type" }, { "aggregate": "sum", "field": "Seats", "title": "Seats" } ]
+    "tooltip": [ 
+      { "field": "Block ID" }, 
+      { "field": "Seating Type" }, 
+      { "aggregate": "sum", "field": "Seats", "title": "Seats" } 
+    ]
   },
-  "config": { "font": "Arial", "axis": {"labelFontSize": 12, "titleFontSize": 14}, "title": {"fontSize": 16, "anchor": "start"} }
+  "config": { 
+    "font": "Arial", 
+    "axis": {"labelFontSize": 12, "titleFontSize": 14}, 
+    "title": {"fontSize": 16, "anchor": "start"},
+    "view": {"stroke": "transparent"}
+  }
 }
